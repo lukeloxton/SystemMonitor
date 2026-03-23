@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: macos-14
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
@@ -19,6 +21,7 @@ jobs:
           mkdir -p "System Monitor.app/Contents/Resources"
           cp "$BINARY" "System Monitor.app/Contents/MacOS/SystemMonitor"
           cp Info.plist "System Monitor.app/Contents/"
+          cp AppIcon.icns "System Monitor.app/Contents/Resources/"
           ditto -c -k --sequesterRsrc --keepParent "System Monitor.app" "SystemMonitor.app.zip"
 
       - name: Create Release
